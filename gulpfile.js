@@ -15,7 +15,7 @@ gulpif    	= require('gulp-if');
 var 
 script_set = [
 	'./js/vendor/jquery/jquery.js',
-	// './js/vendor/foundation/foundation.js',
+	'./js/vendor/foundation/foundation.js',
 	'./js/app.js'
 ];
 
