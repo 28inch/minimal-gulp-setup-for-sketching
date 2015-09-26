@@ -1,0 +1,12 @@
+{
+  "devDependencies": {
+    "gulp-util": "x.x.x",
+    "gulp": "x.x.x",
+    "gulp-uglify": "x.x.x",
+    "gulp-concat": "x.x.x",
+    "gulp-livereload": "x.x.x",
+    "gulp-if": "x.x.x",
+    "gulp-sass": "x.x.x",
+    "gulp-plumber": "x.x.x"
+  }
+}
