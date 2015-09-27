@@ -17,8 +17,12 @@
     'common': {
       init: function() {
 
-        // JavaScript to be fired on all pages
-        console.log('common-init');
+       
+        $(d).foundation();
+
+        // $(document).foundation();
+        
+
       },
       finalize: function() {
         

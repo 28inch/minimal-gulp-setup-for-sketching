@@ -2,7 +2,7 @@
 // foundation.zurb.com
 // Licensed under MIT Open Source
 
-@import "global";
+@import 'global';
 
 //
 // Foundation Visibility Classes
@@ -29,6 +29,9 @@ $visibility-breakpoint-queries:
   unquote($large-up),
   unquote($xlarge-up),
   unquote($xxlarge-up);
+
+//Controls the margin when printing your website.
+$print-margin: 0.34in;
 
 @mixin visibility-loop {
   @each $current-visibility-breakpoint in $visibility-breakpoint-sizes {
@@ -276,8 +279,8 @@ $visibility-breakpoint-queries:
   }
 }
 
-
-@if $include-html-visibility-classes != false {
+@include exports("visibility"){
+  @if $include-html-visibility-classes != false {
 
   @include visibility-loop;
 
@@ -390,6 +393,19 @@ $visibility-breakpoint-queries:
   th.hide-for-touch { display: table-cell !important; }
   .touch th.show-for-touch { display: table-cell !important; }
 
+  /* Screen reader-specific classes */
+  .show-for-sr {
+    @include element-invisible;
+  }
+  .show-on-focus {
+    @include element-invisible;
+
+    &:focus,
+    &:active {
+      @include element-invisible-off;
+    }
+  }
+
   // Only include these styles if you want them.
     @if $include-print-styles {
       /*
@@ -402,8 +418,8 @@ $visibility-breakpoint-queries:
       @media print {
         * {
           background: transparent !important;
-          color: $black !important; /* Black prints faster: h5bp.com/s */
           box-shadow: none !important;
+          color: $black !important; /* Black prints faster: h5bp.com/s */
           text-shadow: none !important;
         }
         .show-for-print { display: block; }
@@ -415,6 +431,10 @@ $visibility-breakpoint-queries:
         tr.show-for-print { display: table-row !important; }
         td.show-for-print { display: table-cell !important; }
         th.show-for-print { display: table-cell !important; }
+
+        @media not print {
+          .show-for-print { display: none !important; }
+        }
 
         a,
         a:visited { text-decoration: underline;}
@@ -440,7 +460,7 @@ $visibility-breakpoint-queries:
 
         img { max-width: 100% !important; }
 
-        @page { margin: 0.5cm; }
+        @page { margin: $print-margin }
 
         p,
         h2,
@@ -458,17 +478,5 @@ $visibility-breakpoint-queries:
         .show-for-print { display: inherit !important; }
       }
     }
-
-  /* Print visibility */
-    @media print {
-      .show-for-print { display: block; }
-      .hide-for-print { display: none; }
-
-      table.show-for-print { display: table !important; }
-      thead.show-for-print { display: table-header-group !important; }
-      tbody.show-for-print { display: table-row-group !important; }
-      tr.show-for-print { display: table-row !important; }
-      td.show-for-print { display: table-cell !important; }
-      th.show-for-print { display: table-cell !important; }
   }
 }
